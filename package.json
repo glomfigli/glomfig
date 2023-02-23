@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build:server": "tsc --build server/tsconfig.json",
-    "lint": "eslint --ext .ts ."
+    "lint:server": "eslint --ext .ts server/"
   },
   "author": "",
   "license": "ISC",
