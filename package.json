@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build:server": "tsc --build server/tsconfig.json"
+    "build:server": "tsc --build server/tsconfig.json",
+    "lint": "eslint --ext .ts ."
   },
   "author": "",
   "license": "ISC",
