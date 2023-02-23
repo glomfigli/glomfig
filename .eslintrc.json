@@ -5,6 +5,7 @@
         "node": true
     },
     "extends": [
+        "plugin:@typescript-eslint/recommended"
     ],
     "overrides": [],
     "parserOptions": {
@@ -23,6 +24,14 @@
         "semi": [
             2,
             "always"
+        ],
+        "max-len": [
+            2,
+            {
+                "code": 80,
+                "tabWidth": 2,
+                "ignoreUrls": true
+            }
         ]
     },
     "settings": {
