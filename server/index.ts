@@ -1,1 +1,1 @@
-
+console.log("Hello from server/index.ts");
