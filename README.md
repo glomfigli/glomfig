@@ -1,6 +1,6 @@
-# Game config manager
+# Config manager app
 
-An application for managing configuration files for games. Only CS:GO is supported in the beginning, possibly more later on.
+An application for managing configuration files for mainly games. Only CS:GO is supported in the beginning, possibly more later on.
 
 ## Usage
 
