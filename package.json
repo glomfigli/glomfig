@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "build:server": "tsc --build server/tsconfig.json",
-    "lint:server": "eslint --ext .ts server/"
+    "lint:server": "eslint --ext .ts server/",
+    "start:client": "cd client && react-scripts start"
   },
   "author": "",
   "license": "ISC",
@@ -24,6 +25,7 @@
   },
   "dependencies": {
     "express": "^4.18.2",
-    "react": "^18.2.0"
+    "react": "^18.2.0",
+    "react-scripts": "^5.0.1"
   }
 }
