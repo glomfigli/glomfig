@@ -27,6 +27,4 @@ jobs:
         run : npm ci
 
       - name: Run ESLint
-        run: npm run lint:server
-
-
+        run: npm run lint
