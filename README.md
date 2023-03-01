@@ -1,4 +1,4 @@
-# Config manager app
+# Glomfig
 
 An application for managing configuration files for games. Only CS:GO is supported in the beginning, possibly more among the likes of Rocket League, Minecraft later on.
 
