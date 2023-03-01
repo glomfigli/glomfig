@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "build:server": "tsc --build server/tsconfig.json",
-    "start:server": "node server/build/index.js",
+    "run:server": "node server/build/index.js",
+    "start:server": "tsc --build server/tsconfig.json && node server/build/index.js",
     "lint": "eslint --ext .ts --ext .tsx .",
     "start:client": "cd client && react-scripts start"
   },
