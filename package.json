@@ -6,7 +6,7 @@
   "scripts": {
     "client:start": "cd client && react-scripts start",
     "client:build": "cd client && react-scripts build",
-    "server:start": "tsc --build server/tsconfig.json && node server/build/index.js",
+    "server:start": "npm run server:build && npm run server:run",
     "server:build": "tsc --build server/tsconfig.json",
     "server:run": "node server/build/index.js",
     "lint": "eslint --ext .ts --ext .tsx .",
