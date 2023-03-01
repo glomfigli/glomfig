@@ -4,11 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build:server": "tsc --build server/tsconfig.json",
-    "run:server": "node server/build/index.js",
-    "start:server": "tsc --build server/tsconfig.json && node server/build/index.js",
+    "client:start": "cd client && react-scripts start",
+    "client:build": "cd client && react-scripts build",
+    "server:start": "tsc --build server/tsconfig.json && node server/build/index.js",
+    "server:build": "tsc --build server/tsconfig.json",
+    "server:run": "node server/build/index.js",
     "lint": "eslint --ext .ts --ext .tsx .",
-    "start:client": "cd client && react-scripts start"
+    "clean": "rm -rf server/build client/build"
   },
   "author": "",
   "license": "ISC",
