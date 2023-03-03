@@ -1,22 +1,20 @@
 import express from "express";
-
+import UserController from "../controllers/user-controller";
 
 const router = express.Router();
-
-//  await({ username: req.params.name, password: req.params.password}).save();
-
 
 router.get("/users/:uid", async (req: express.Request,
   res: express.Response) => {
   return res.json({});
 });
 
-
-router.post("/", async (req: express.Request,
+router.post("/users", async (req: express.Request,
   res: express.Response) => {
-  return res.json({});
+  const { username, password } = req.body;
+
+  UserController.register(username, password);
+
+  return res.json({ created: username });
 });
-
-
 
 export default router;
