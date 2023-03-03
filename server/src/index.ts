@@ -6,7 +6,7 @@ import router from "./routes/user-routes";
 const PORT = 8080;
 const app = express();
 app.use(express.json());
-app.use(router);
+app.use("/api", router);
 
 
 
