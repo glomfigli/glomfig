@@ -1,9 +1,14 @@
 import express from "express";
 import "./config";
 import database from "./database";
+import router from "./routes/user-routes";
 
-const app = express();
 const PORT = 8080;
+const app = express();
+app.use(express.json())
+app.use(router);
+
+
 
 function run() {
   database.connect();

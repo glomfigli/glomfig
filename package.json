@@ -9,7 +9,7 @@
     "server:start": "npm run server:build && npm run server:run",
     "server:build": "tsc --build server/tsconfig.json",
     "server:run": "node server/build/index.js",
-    "server:watch": "nodemon server/index.ts",
+    "server:watch": "nodemon server/src/index.ts",
     "lint": "eslint --ext .ts --ext .tsx .",
     "clean": "rm -rf server/build client/build"
   },
