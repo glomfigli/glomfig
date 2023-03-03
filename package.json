@@ -4,10 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build:server": "tsc --build server/tsconfig.json",
-    "start:server": "node server/build/index.js",
+    "client:start": "cd client && react-scripts start",
+    "client:build": "cd client && react-scripts build",
+    "server:start": "npm run server:build && npm run server:run",
+    "server:build": "tsc --build server/tsconfig.json",
+    "server:run": "node server/build/index.js",
+    "server:watch": "nodemon server/index.ts",
     "lint": "eslint --ext .ts --ext .tsx .",
-    "start:client": "cd client && react-scripts start"
+    "clean": "rm -rf server/build client/build"
   },
   "author": "",
   "license": "ISC",
@@ -22,6 +26,8 @@
     "eslint-plugin-n": "^15.6.1",
     "eslint-plugin-promise": "^6.1.1",
     "eslint-plugin-react": "^7.32.2",
+    "nodemon": "^2.0.20",
+    "ts-node": "^10.9.1",
     "typescript": "^4.9.5"
   },
   "dependencies": {
