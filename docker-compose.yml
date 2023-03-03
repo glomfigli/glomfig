@@ -1,0 +1,8 @@
+version: "3"
+
+services:
+  database:
+    image: mongodb/mongodb-community-server:6.0-ubi8
+    restart: always
+    ports:
+        - 27017:27017
