@@ -11,6 +11,7 @@
     "server:run": "node server/build/index.js",
     "server:watch": "nodemon server/src/index.ts",
     "lint": "eslint --ext .ts --ext .tsx .",
+    "lint:fix": "npm run lint -- --fix",
     "clean": "rm -rf server/build client/build"
   },
   "author": "",
