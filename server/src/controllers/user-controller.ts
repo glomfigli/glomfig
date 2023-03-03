@@ -19,6 +19,11 @@ async function register(username: string, password: string) {
   await new User({ username, password }).save(); // TODO: hash
 }
 
+function findOne(username: string) {
+  const foundUser = User.findOne({ username });
+  return foundUser;
+}
+
 export default {
-  register
+  register, findOne
 };

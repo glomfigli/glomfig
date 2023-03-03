@@ -5,7 +5,8 @@ const router = express.Router();
 
 router.get("/users/:uid", async (req: express.Request,
   res: express.Response) => {
-  return res.json({});
+  const foundUser = await UserController.findOne(req.params.uid);
+  return res.json(foundUser);
 });
 
 router.post("/users", async (req: express.Request,
