@@ -13,9 +13,9 @@ router.post("/users", async (req: express.Request,
   res: express.Response) => {
   const { username, password } = req.body;
 
-  UserController.register(username, password);
+  const createdUser = await UserController.register(username, password);
 
-  return res.json({ created: username });
+  return res.json(createdUser);
 });
 
 export default router;

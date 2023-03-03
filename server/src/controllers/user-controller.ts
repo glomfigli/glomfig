@@ -4,7 +4,7 @@ const MINIMUM_USERNAME_LENGTH = 3;
 const MAXIMUM_USERNAME_LENGTH = 20;
 const MINIMUM_PASSWORD_LENGTH = 8;
 
-async function register(username: string, password: string) {
+function register(username: string, password: string) {
   if (username.length < MINIMUM_USERNAME_LENGTH ||
       username.length > MAXIMUM_USERNAME_LENGTH) {
     throw new Error(`Username must contain ${
@@ -16,7 +16,7 @@ async function register(username: string, password: string) {
       MINIMUM_PASSWORD_LENGTH} characters long`);
   }
 
-  await new User({ username, password }).save(); // TODO: hash
+  return new User({ username, password }).save(); // TODO: hash
 }
 
 function findOne(username: string) {
