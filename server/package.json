@@ -6,7 +6,8 @@
   "scripts": {
     "build": "tsc --build tsconfig.json",
     "start": "node build/index.js",
-    "watch": "nodemon src/index.ts"
+    "watch": "nodemon src/index.ts",
+    "lint": "eslint ."
   },
   "author": "",
   "license": "ISC",
