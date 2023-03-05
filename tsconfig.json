@@ -1,12 +1,9 @@
 {
   "compilerOptions": {
-    "target": "es2016",
-    "lib": ["es6", "dom"],
-    "module": "commonjs",
+    "lib": ["dom"],
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
-    "noImplicitAny": true,
-    "skipLibCheck": true
+    "noImplicitAny": true
   }
 }
