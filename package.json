@@ -4,8 +4,6 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint .",
-    "lint:fix": "npm run lint -- --fix",
     "clean": "rm -rf server/build client/build"
   },
   "author": "",
