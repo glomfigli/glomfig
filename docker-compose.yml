@@ -13,14 +13,14 @@ services:
     networks:
       - glomfig-dev
     volumes:
-      - .:/usr/src/glomfig
+      - ./client/src:/usr/src/glomfig/client/src
   server:
     build:
       context: ./server
     ports:
       - 8080:8080
     volumes:
-      - .:/usr/src/glomfig
+      - ./server/src:/usr/src/glomfig/server/src
     networks:
       - glomfig-dev
     depends_on:
