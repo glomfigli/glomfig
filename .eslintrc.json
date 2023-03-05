@@ -4,6 +4,7 @@
         "es2021": true,
         "node": true
     },
+    "root": true,
     "extends": [
         "plugin:@typescript-eslint/recommended"
     ],
@@ -13,9 +14,6 @@
         "ecmaVersion": "latest",
         "sourceType": "module"
     },
-    "plugins": [
-        "react"
-    ],
     "rules": {
         "quotes": [
             2,
@@ -33,10 +31,5 @@
                 "ignoreUrls": true
             }
         ]
-    },
-    "settings": {
-        "react": {
-            "version": "detect"
-        }
     }
 }
