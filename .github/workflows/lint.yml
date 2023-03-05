@@ -14,13 +14,9 @@ jobs:
         with:
           node-version: 18
           cache: npm
-      - name: Install shared dependencies
-        run: npm ci
-
-      - name: Install client dependencies
-        run: npm ci
-        working-directory: ./client
-      - run: npm run lint
+      - run: |
+          npm ci
+          npm run lint
         working-directory: ./client
 
   lint-server:
@@ -31,11 +27,7 @@ jobs:
         with:
           node-version: 18
           cache: npm
-      - name: Install shared dependencies
-        run: npm ci
-
-      - name: Install server dependencies
-        run: npm ci
-        working-directory: ./server
-      - run: npm run lint
+      - run: |
+          npm ci
+          npm run lint
         working-directory: ./server
