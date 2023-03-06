@@ -12,15 +12,24 @@ type UserDocument = HydratedDocument<IUser>;
 
 async function register (username: string, password: string):
 Promise<UserDocument> {
-  if (username.length < MINIMUM_USERNAME_LENGTH ||
+  if (username === undefined) {
+    throw new Error("Username is required!");
+  } else if (username.length < MINIMUM_USERNAME_LENGTH ||
       username.length > MAXIMUM_USERNAME_LENGTH) {
     throw new Error(`Username must contain ${
       MINIMUM_USERNAME_LENGTH}-${MAXIMUM_USERNAME_LENGTH} characters`);
   }
 
-  if (password.length < MINIMUM_PASSWORD_LENGTH) {
+  if (password === undefined) {
+    throw new Error("Password is required!");
+  } else if (password.length < MINIMUM_PASSWORD_LENGTH) {
     throw new Error(`Password must be at least ${
       MINIMUM_PASSWORD_LENGTH} characters long`);
+  }
+
+  const userExists: boolean = await User.findOne({ username }) !== null;
+  if (userExists) {
+    throw new Error("Username must be unique!");
   }
 
   const passwordHash = await bcrypt.hash(password, ROUNDS);
