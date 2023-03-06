@@ -3,10 +3,31 @@ version: "3"
 services:
   database:
     image: mongodb/mongodb-community-server:6.0-ubi8
-    restart: always
+    networks:
+      - glomfig-dev
+  client:
+    build:
+      context: ./client
     ports:
-        - 27017:27017
+      - 3000:3000
+    networks:
+      - glomfig-dev
+    volumes:
+      - ./client/src:/usr/src/glomfig/client/src
   server:
-    context: ./server
+    build:
+      context: ./server
     ports:
       - 8080:8080
+    volumes:
+      - ./server/src:/usr/src/glomfig/server/src
+    networks:
+      - glomfig-dev
+    depends_on:
+      - database
+    environment:
+      DATABASE_URI: mongodb://database:27017/configapp?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+1.8.0
+networks:
+  glomfig-dev:
+volumes:
+  glomfig-dev:

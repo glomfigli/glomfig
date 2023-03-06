@@ -1,8 +1,10 @@
 import { useState } from "react";
-import Option from "../Option";
+import type Option from "../Option";
 import Field from "../components/Field";
 
-function drawOptions(setOption: (option: Option) => void, options: Option[]) {
+function drawOptions (
+  setOption: (option: Option) => void, options: Option[]
+): JSX.Element[] {
   return options.map((option) =>
     <Field
       key={option.id}
@@ -13,7 +15,7 @@ function drawOptions(setOption: (option: Option) => void, options: Option[]) {
   );
 }
 
-function App() {
+function App (): JSX.Element {
   const [options, setOptions] = useState<Option[]>(
     [
       { id: "cl_crosshairgap", name: "Crosshair gap", value: 0 },
@@ -21,7 +23,7 @@ function App() {
     ]
   );
 
-  const setOption = (newOption: Option) => {
+  const setOption = (newOption: Option): void => {
     const { id, value } = newOption;
 
     const targetIndex = options.findIndex(
@@ -34,7 +36,7 @@ function App() {
       setOptions(newOptions);
     }
   };
-  
+
   return (
     <div>
       { drawOptions(setOption, options) }

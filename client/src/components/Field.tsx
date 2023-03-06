@@ -1,15 +1,15 @@
-import Option from "../Option";
+import type Option from "../Option";
 
-function Field(props: {
-  option: Option,
-  type: string,
+function Field (props: {
+  option: Option
+  type: string
   valueChanged: (option: Option) => void
-}) {
+}): JSX.Element {
   const { option } = props;
 
   const onValueChanged = (
     event: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  ): void => {
     const value = event.target.value;
     props.valueChanged({ ...option, value });
   };

@@ -1,0 +1,21 @@
+{
+    "env": {
+        "es2021": true,
+        "node": true
+    },
+    "extends": "standard-with-typescript",
+    "overrides": [
+    ],
+    "parserOptions": {
+        "project": "./tsconfig.json",
+        "ecmaVersion": "latest",
+        "sourceType": "module"
+    },
+    "rules": {
+        "max-len": ["error", { "code": 80 }],
+        "semi": "off",
+        "@typescript-eslint/semi": ["error", "always"],
+        "quotes": "off",
+        "@typescript-eslint/quotes": ["error", "double"]
+    }
+}

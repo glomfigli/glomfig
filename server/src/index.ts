@@ -8,14 +8,12 @@ const app = express();
 app.use(express.json());
 app.use("/api", router);
 
-
-
-function run() {
-  database.connect();
+async function run (): Promise<void> {
+  await database.connect();
 }
 
 app.listen(PORT, () => {
   console.debug(`Running server on port ${PORT}`);
-    
-  run();
+
+  void run();
 });
