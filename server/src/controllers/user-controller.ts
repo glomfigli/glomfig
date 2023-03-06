@@ -1,10 +1,14 @@
-import User from "../models/User";
+import { type HydratedDocument } from "mongoose";
+import { User, type IUser } from "../models/User";
 
 const MINIMUM_USERNAME_LENGTH = 3;
 const MAXIMUM_USERNAME_LENGTH = 20;
 const MINIMUM_PASSWORD_LENGTH = 8;
 
-function register(username: string, password: string) {
+type UserDocument = HydratedDocument<IUser>;
+
+async function register (username: string, password: string):
+Promise<UserDocument> {
   if (username.length < MINIMUM_USERNAME_LENGTH ||
       username.length > MAXIMUM_USERNAME_LENGTH) {
     throw new Error(`Username must contain ${
@@ -16,11 +20,11 @@ function register(username: string, password: string) {
       MINIMUM_PASSWORD_LENGTH} characters long`);
   }
 
-  return new User({ username, password }).save(); // TODO: hash
+  return await new User({ username, password }).save(); // TODO: hash
 }
 
-function findOne(username: string) {
-  const foundUser = User.findOne({ username });
+async function findOne (username: string): Promise<UserDocument | null> {
+  const foundUser = await User.findOne({ username });
   return foundUser;
 }
 

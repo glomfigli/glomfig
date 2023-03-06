@@ -1,21 +1,25 @@
-import express from "express";
+import { Router, type Request, type Response } from "express";
 import UserController from "../controllers/user-controller";
 
-const router = express.Router();
+const router = Router();
 
-router.get("/users/:uid", async (req: express.Request,
-  res: express.Response) => {
+async function getUser (req: Request, res: Response): Promise<Response> {
   const foundUser = await UserController.findOne(req.params.uid);
   return res.json(foundUser);
+}
+
+async function postUser (req: Request, res: Response): Promise<Response> {
+  const { username, password } = req.body;
+  const createdUser = await UserController.register(username, password);
+  return res.json(createdUser);
+}
+
+router.get("/users/:uid", (req: Request, res: Response) => {
+  void getUser(req, res);
 });
 
-router.post("/users", async (req: express.Request,
-  res: express.Response) => {
-  const { username, password } = req.body;
-
-  const createdUser = await UserController.register(username, password);
-
-  return res.json(createdUser);
+router.post("/users", (req: Request, res: Response) => {
+  void postUser(req, res);
 });
 
 export default router;
