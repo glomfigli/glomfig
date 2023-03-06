@@ -10,6 +10,10 @@ const ROUNDS = 10;
 
 type UserDocument = HydratedDocument<IUser>;
 
+async function userExists (username: string): Promise<boolean> {
+  return await User.findOne({ username }) !== null;
+}
+
 async function register (username: string, password: string):
 Promise<UserDocument> {
   if (username === undefined) {
@@ -27,8 +31,8 @@ Promise<UserDocument> {
       MINIMUM_PASSWORD_LENGTH} characters long`);
   }
 
-  const userExists: boolean = await User.findOne({ username }) !== null;
-  if (userExists) {
+  const usernameTaken: boolean = await userExists(username);
+  if (usernameTaken) {
     throw new Error("Username must be unique!");
   }
 
