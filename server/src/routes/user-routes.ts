@@ -18,12 +18,22 @@ async function postUser (req: Request, res: Response): Promise<Response> {
   }
 }
 
+async function postConfig (req: Request, res: Response): Promise<Response> {
+  const { username, name, config } = req.body;
+  const createdConfig = await UserController.addConfig(username, name, config);
+  return res.json(createdConfig);
+}
+
 router.get("/users/:uid", (req: Request, res: Response) => {
   void getUser(req, res);
 });
 
 router.post("/users", (req: Request, res: Response) => {
   void postUser(req, res);
+});
+
+router.post("/users/:uid/configs", (req: Request, res: Response) => {
+  void postConfig(req, res);
 });
 
 export default router;
