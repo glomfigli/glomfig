@@ -1,9 +1,12 @@
 import { type HydratedDocument } from "mongoose";
 import { User, type IUser } from "../models/User";
+import bcrypt from "bcrypt";
 
 const MINIMUM_USERNAME_LENGTH = 3;
 const MAXIMUM_USERNAME_LENGTH = 20;
 const MINIMUM_PASSWORD_LENGTH = 8;
+
+const ROUNDS = 10;
 
 type UserDocument = HydratedDocument<IUser>;
 
@@ -20,7 +23,9 @@ Promise<UserDocument> {
       MINIMUM_PASSWORD_LENGTH} characters long`);
   }
 
-  return await new User({ username, password }).save(); // TODO: hash
+  const passwordHash = await bcrypt.hash(password, ROUNDS);
+
+  return await new User({ username, passwordHash }).save();
 }
 
 async function findOne (username: string): Promise<UserDocument | null> {
