@@ -16,4 +16,4 @@ With one command, a Docker Compose configuration orchestrates the client, server
 Run `docker compose up` to start the project in development mode.
 The client will serve on port 3000, while the server will serve on port 8080.
 No packages need to be installed with npm. However, it is still wise
-to issue the installation commands once. This ensures, that you can use linter successfully.
+to issue the installation commands once. This ensures that you can use linter successfully.
