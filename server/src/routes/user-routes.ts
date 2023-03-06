@@ -10,8 +10,12 @@ async function getUser (req: Request, res: Response): Promise<Response> {
 
 async function postUser (req: Request, res: Response): Promise<Response> {
   const { username, password } = req.body;
-  const createdUser = await UserController.register(username, password);
-  return res.json(createdUser);
+  try {
+    const createdUser = await UserController.register(username, password);
+    return res.json(createdUser);
+  } catch (err) {
+    return res.status(400).json({ error: String(err) });
+  }
 }
 
 router.get("/users/:uid", (req: Request, res: Response) => {
