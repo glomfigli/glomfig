@@ -4,7 +4,6 @@ import ConfigController from "../controllers/config-controller";
 const router = Router();
 
 const postConfig = (req: Request, res: Response): void => {
-
   const name = req.body.name;
   const sourceText = req.body.sourceText;
   const userId = req.params.userId;
@@ -14,8 +13,6 @@ const postConfig = (req: Request, res: Response): void => {
     .catch((err) => res.status(400).json({ error: err.message }));
 };
 
-
 router.post("/configs/:userId", postConfig);
-
 
 export default router;
