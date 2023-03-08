@@ -11,7 +11,8 @@ const ROUNDS = 10;
 type UserDocument = HydratedDocument<IUser>;
 
 async function userExists (username: string): Promise<boolean> {
-  return await User.findOne({ username }) !== null;
+  const user = await User.findOne({ username });
+  return user !== null;
 }
 
 async function register (username: string, password: string):
@@ -41,11 +42,23 @@ Promise<UserDocument> {
   return await new User({ username, passwordHash }).save();
 }
 
-async function findOne (username: string): Promise<UserDocument | null> {
-  const foundUser = await User.findOne({ username });
+async function findOne (userId: string): Promise<UserDocument | null> {
+  const foundUser = await User.findOne({ _id: userId });
+  if (foundUser === null) {
+    throw new Error("User not found");
+  }
   return foundUser;
 }
 
+async function deleteOne (userId: string): Promise<UserDocument | null> {
+  const deletedUser = await User.findOneAndDelete({ _id: userId });
+  if (deletedUser === null) {
+    throw new Error("Failed to delete user");
+  }
+
+  return deletedUser;
+}
+
 export default {
-  register, findOne
+  register, findOne, deleteOne
 };
