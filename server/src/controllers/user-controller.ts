@@ -60,6 +60,9 @@ Promise<UserDocument> {
 
 async function findOne (username: string): Promise<UserDocument | null> {
   const foundUser = await User.findOne({ username });
+  if (!foundUser) {
+    throw new Error("User not found");
+  }
   return foundUser;
 }
 
