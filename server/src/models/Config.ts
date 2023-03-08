@@ -4,12 +4,12 @@ const schemaName = "Config";
 
 export interface IConfig {
   name: string
-  config: [{ key: string, value: string }]
+  sourceText: string
 }
 
 const schema = new mongoose.Schema<IConfig>({
   name: { type: String, required: true },
-  config: [{ key: String, value: String }]
+  sourceText: { type: String, required: true }
 });
 
 export const Config = mongoose.model<IConfig>(schemaName, schema);
