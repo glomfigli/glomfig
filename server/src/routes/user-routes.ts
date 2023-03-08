@@ -3,37 +3,31 @@ import UserController from "../controllers/user-controller";
 
 const router = Router();
 
-async function getUser (req: Request, res: Response): Promise<Response> {
-  const foundUser = await UserController.findOne(req.params.uid);
-  return res.json(foundUser);
-}
+const getUser = (req: Request, res: Response): void => {
+  UserController.findOne(req.params.userId)
+    .then((user) => res.status(200).json(user))
+    .catch((err) => res.status(500).json({ error: err.message }));
+};
 
-async function postUser (req: Request, res: Response): Promise<Response> {
+const postUser = (req: Request, res: Response): void => {
   const { username, password } = req.body;
-  try {
-    const createdUser = await UserController.register(username, password);
-    return res.json(createdUser);
-  } catch (err) {
-    return res.status(400).json({ error: String(err) });
-  }
-}
 
-async function postConfig (req: Request, res: Response): Promise<Response> {
-  const { username, name, config } = req.body;
-  const createdConfig = await UserController.addConfig(username, name, config);
-  return res.json(createdConfig);
-}
+  UserController.register(username, password)
+    .then((user) => res.status(201).json(user))
+    .catch((err) => res.status(500).json({ error: err.message }));
+};
 
-router.get("/users/:uid", (req: Request, res: Response) => {
-  void getUser(req, res);
-});
+const postConfig = (req: Request, res: Response): void => {
+  const { name, config } = req.body;
+  const username = req.params.userId;
 
-router.post("/users", (req: Request, res: Response) => {
-  void postUser(req, res);
-});
+  UserController.addConfig(username, name, config)
+    .then((createdConfig) => res.status(201).json(createdConfig))
+    .catch((err) => res.status(500).json({ error: err.message }));
+};
 
-router.post("/users/:uid/configs", (req: Request, res: Response) => {
-  void postConfig(req, res);
-});
+router.get("/users/:userId", getUser);
+router.post("/users", postUser);
+router.post("/users/:userID/configs", postConfig);
 
 export default router;
