@@ -1,6 +1,8 @@
 import { type HydratedDocument } from "mongoose";
+import jsonwebtoken from "jsonwebtoken";
 import { Session, type ISession } from "../models/Session";
 import UserController from "../controllers/user-controller";
+import { SESSION_SECRET } from "../config";
 
 type SessionDocument = HydratedDocument<ISession>;
 
@@ -18,7 +20,13 @@ Promise<SessionDocument> {
 
   await UserController.login(userId, password);
 
-  const session = await new Session({ maxAge: 3600, user: userId }).save();
+  const authenticationToken = jsonwebtoken.sign({ userId }, SESSION_SECRET);
+  const session = await new Session({
+    maxAge: 3600,
+    user: userId,
+    authenticationToken
+  }).save();
+
   if (session === null) {
     throw new Error("Session creation failed");
   }

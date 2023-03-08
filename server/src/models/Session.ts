@@ -5,6 +5,7 @@ const schemaName = "Session";
 export interface ISession {
   createdAt: Date
   maxAge: number
+  authenticationToken: string
   user: Types.ObjectId
 }
 
@@ -15,6 +16,10 @@ const schema = new mongoose.Schema<ISession>({
   },
   maxAge: {
     type: mongoose.Schema.Types.Number,
+    required: true
+  },
+  authenticationToken: {
+    type: mongoose.Schema.Types.String,
     required: true
   },
   user: {
