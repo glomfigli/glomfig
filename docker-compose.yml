@@ -5,6 +5,8 @@ services:
     image: mongodb/mongodb-community-server:6.0-ubi8
     networks:
       - glomfig-dev
+    ports:
+      - 27017:27017
   client:
     build:
       context: ./client
