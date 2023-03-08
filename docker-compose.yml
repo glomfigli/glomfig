@@ -33,6 +33,7 @@ services:
       - database
     environment:
       DATABASE_URI: mongodb://database:27017/configapp?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+1.8.0
+      SESSSION_SECRET: 4u9rweifdj9d32f9iwhdjchd
 networks:
   glomfig-dev:
 volumes:
