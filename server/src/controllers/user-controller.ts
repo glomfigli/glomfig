@@ -42,6 +42,15 @@ Promise<UserDocument> {
   return await new User({ username, passwordHash }).save();
 }
 
+async function login (userId: string, password: string): Promise<boolean> {
+  const user = await findOne(userId);
+  if (user === null) {
+    return false;
+  }
+
+  return await bcrypt.compare(password, user.passwordHash);
+}
+
 async function findOne (userId: string): Promise<UserDocument | null> {
   const foundUser = await User.findOne({ _id: userId });
   if (foundUser === null) {
@@ -60,5 +69,5 @@ async function deleteOne (userId: string): Promise<UserDocument | null> {
 }
 
 export default {
-  register, findOne, deleteOne
+  register, login, findOne, deleteOne
 };
