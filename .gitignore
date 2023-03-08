@@ -1,4 +1,5 @@
 node_modules
-server/build/
+npm-debug.log*
+
 .env
-requests
+.env.*
