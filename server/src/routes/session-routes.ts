@@ -8,8 +8,10 @@ const postSession = (req: Request, res: Response): void => {
   const { userId, password } = req.body;
 
   SessionController.createSession(userId, password)
-    .then((session) => res.status(201).json(session))
-    .catch((err) => res.status(400).json({ error: err.message }));
+    .then((session) => res
+      .cookie("authentication-token", session.authenticationToken)
+      .status(201).json(session)
+    ).catch((err) => res.status(400).json({ error: err.message }));
 };
 
 const invalidateSessions = (req: Request, res: Response): void => {
