@@ -1,4 +1,4 @@
-import mongoose, { Types } from "mongoose";
+import mongoose, { type Types } from "mongoose";
 
 const schemaName = "User";
 

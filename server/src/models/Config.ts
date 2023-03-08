@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 
-
 const schemaName = "Config";
 
 export interface IConfig {

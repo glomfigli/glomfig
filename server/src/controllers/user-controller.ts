@@ -50,7 +50,7 @@ async function findOne (userId: string): Promise<UserDocument | null> {
   return foundUser;
 }
 
-async function deleteOne(userId: string): Promise<UserDocument | null> {
+async function deleteOne (userId: string): Promise<UserDocument | null> {
   const deletedUser = await User.findOneAndDelete({ _id: userId });
   if (deletedUser === null) {
     throw new Error("Failed to delete user");
