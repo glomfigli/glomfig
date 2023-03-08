@@ -5,6 +5,11 @@ import UserController from "../controllers/user-controller";
 import { SESSION_SECRET } from "../config";
 
 type SessionDocument = HydratedDocument<ISession>;
+interface DeleteResult {
+  ok?: number
+  deletedCount: number
+  n?: number
+};
 
 async function createSession (userId: string, password: string):
 Promise<SessionDocument> {
@@ -34,6 +39,11 @@ Promise<SessionDocument> {
   return session;
 }
 
+async function invalidateSessions (userId: string): Promise<DeleteResult> {
+  return await Session.deleteMany({ user: userId });
+}
+
 export default {
-  createSession
+  createSession,
+  invalidateSessions
 };

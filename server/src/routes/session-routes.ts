@@ -15,12 +15,19 @@ const getSession = (req: Request, res: Response): void => {
 
 };
 
-const deleteSession = (req: Request, res: Response): void => {
+const invalidateSessions = (req: Request, res: Response): void => {
+  const { userId } = req.body;
 
+  SessionController.invalidateSessions(userId)
+    .then((result) => res.status(200).json({
+      status: "ok",
+      numInvalidated: result.deletedCount
+    }))
+    .catch((err) => res.status(400).json({ error: err.message }));
 };
 
 router.post("/sessions", postSession);
 router.get("/sessions/:sessionId", getSession);
-router.delete("/sessions/:sessionId", deleteSession);
+router.post("/sessions/invalidate", invalidateSessions);
 
 export default router;
