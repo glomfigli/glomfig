@@ -1,6 +1,5 @@
 import { type HydratedDocument } from "mongoose";
 import { User, type IUser } from "../models/User";
-import { Config, type IConfig } from "../models/Config";
 import bcrypt from "bcrypt";
 
 const MINIMUM_USERNAME_LENGTH = 3;
@@ -10,25 +9,10 @@ const MINIMUM_PASSWORD_LENGTH = 8;
 const ROUNDS = 10;
 
 type UserDocument = HydratedDocument<IUser>;
-type ConfigDocument = HydratedDocument<IConfig>;
-
-async function addConfig ( username: string, name: string,
-   config: [{ key: string, value: string }]): Promise<ConfigDocument> {
-
-    const createdConfig = await new Config({ name, config }).save();
-    const user = await findOne(username);
-    if (!user) {
-      throw new Error("User not found!");
-    }
-
-    user.configs = user.configs.concat(createdConfig._id);
-    await user.save();
-    return createdConfig;
-   }
-
 
 async function userExists (username: string): Promise<boolean> {
-  return await User.findOne({ username }) !== null;
+  const user = await User.findOne({ username });
+  return user !== null;
 }
 
 async function register (username: string, password: string):
@@ -58,14 +42,23 @@ Promise<UserDocument> {
   return await new User({ username, passwordHash }).save();
 }
 
-async function findOne (username: string): Promise<UserDocument | null> {
-  const foundUser = await User.findOne({ username });
-  if (!foundUser) {
+async function findOne (userId: string): Promise<UserDocument | null> {
+  const foundUser = await User.findOne({ _id: userId });
+  if (foundUser === null) {
     throw new Error("User not found");
   }
   return foundUser;
 }
 
+async function deleteOne(userId: string): Promise<UserDocument | null> {
+  const deletedUser = await User.findOneAndDelete({ _id: userId });
+  if (deletedUser === null) {
+    throw new Error("Failed to delete user");
+  }
+
+  return deletedUser;
+}
+
 export default {
-  register, findOne, addConfig
+  register, findOne, deleteOne
 };
