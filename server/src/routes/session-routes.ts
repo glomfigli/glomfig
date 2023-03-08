@@ -1,5 +1,6 @@
 import { Router, type Request, type Response } from "express";
 import SessionController from "../controllers/session-controller";
+import { authenticateUser } from "../middleware/authentication";
 
 const router = Router();
 
@@ -21,6 +22,8 @@ const invalidateSessions = (req: Request, res: Response): void => {
     }))
     .catch((err) => res.status(400).json({ error: err.message }));
 };
+
+router.use("/sessions/invalidate", authenticateUser);
 
 router.post("/sessions", postSession);
 router.post("/sessions/invalidate", invalidateSessions);
