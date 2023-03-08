@@ -3,27 +3,30 @@ import UserController from "../controllers/user-controller";
 
 const router = Router();
 
-async function getUser (req: Request, res: Response): Promise<Response> {
-  const foundUser = await UserController.findOne(req.params.uid);
-  return res.json(foundUser);
-}
+const getUser = (req: Request, res: Response): void => {
+  UserController.findOne(req.params.userId)
+    .then((user) => res.status(200).json(user))
+    .catch((err) => res.status(400).json({ error: err.message }));
+};
 
-async function postUser (req: Request, res: Response): Promise<Response> {
+const postUser = (req: Request, res: Response): void => {
   const { username, password } = req.body;
-  try {
-    const createdUser = await UserController.register(username, password);
-    return res.json(createdUser);
-  } catch (err) {
-    return res.status(400).json({ error: String(err) });
-  }
-}
 
-router.get("/users/:uid", (req: Request, res: Response) => {
-  void getUser(req, res);
-});
+  UserController.register(username, password)
+    .then((user) => res.status(201).json(user))
+    .catch((err) => res.status(400).json({ error: err.message }));
+};
 
-router.post("/users", (req: Request, res: Response) => {
-  void postUser(req, res);
-});
+const deleteUser = (req: Request, res: Response): void => {
+  const userId = req.params.userId;
+
+  UserController.deleteOne(userId)
+    .then((user) => res.status(200).json(user))
+    .catch((err) => res.status(400).json({ error: err.message }));
+};
+
+router.post("/users", postUser);
+router.get("/users/:userId", getUser);
+router.delete("/users/:userId", deleteUser);
 
 export default router;
