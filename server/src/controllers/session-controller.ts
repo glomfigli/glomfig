@@ -11,6 +11,11 @@ Promise<SessionDocument> {
     throw new Error("Trying to create session for nonexistent user");
   }
 
+  const existingSession = await Session.findOne({ user: userId });
+  if (existingSession !== null) {
+    return existingSession;
+  }
+
   await UserController.login(userId, password);
 
   const session = await new Session({ maxAge: 3600, user: userId }).save();
