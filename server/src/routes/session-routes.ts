@@ -11,10 +11,6 @@ const postSession = (req: Request, res: Response): void => {
     .catch((err) => res.status(400).json({ error: err.message }));
 };
 
-const getSession = (req: Request, res: Response): void => {
-
-};
-
 const invalidateSessions = (req: Request, res: Response): void => {
   const { userId } = req.body;
 
@@ -27,7 +23,6 @@ const invalidateSessions = (req: Request, res: Response): void => {
 };
 
 router.post("/sessions", postSession);
-router.get("/sessions/:sessionId", getSession);
 router.post("/sessions/invalidate", invalidateSessions);
 
 export default router;
