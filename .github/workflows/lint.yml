@@ -11,26 +11,34 @@ on:
 jobs:
   lint-client:
     runs-on: ubuntu-20.04
+    defaults:
+      run:
+        working-directory: ./client
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
           node-version: 18
           cache: npm
-      - run: |
+          cache-dependency-path: ./client/package-lock.json
+      - name: Lint client
+        run: |
           npm ci
           npm run lint
-        working-directory: ./client
 
   lint-server:
     runs-on: ubuntu-20.04
+    defaults:
+      run:
+        working-directory: ./server
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
           node-version: 18
           cache: npm
-      - run: |
+          cache-dependency-path: ./server/package-lock.json
+      - name: Lint server
+        run: |
           npm ci
           npm run lint
-        working-directory: ./server
