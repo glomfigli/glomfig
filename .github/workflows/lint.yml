@@ -11,6 +11,9 @@ on:
 jobs:
   lint-client:
     runs-on: ubuntu-20.04
+    defaults:
+      run:
+        working-directory: ./client
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -25,6 +28,9 @@ jobs:
 
   lint-server:
     runs-on: ubuntu-20.04
+    defaults:
+      run:
+        working-directory: ./server
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
