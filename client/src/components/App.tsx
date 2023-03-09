@@ -75,7 +75,10 @@ const ConfigScreen: React.FC = () => {
 const Home: React.FC = () => {
   return (
     <div>
+      <br />
       <h2>Home</h2>
+      <br />
+
     </div>
   );
 };
@@ -88,37 +91,34 @@ const Login: React.FC = () => {
 
   return (
     <div>
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="username">Username</label>
+    <div className={styles.login}>
+      <div className={styles.loginBox}>
+        <form onSubmit={handleSubmit}>
+        <h2>Login</h2>
+        <br />
+        <label htmlFor="username">Username: </label>
         <input type="text" id="username" name="username" />
-        <br></br>
-        <label htmlFor="password">Password</label>
+        <br />
+        <label htmlFor="password">Password: </label>
         <input type="password" id="password" name="password" />
-        <br></br><br></br>
-        <input type="submit" value="Submit" />
+        <br /><br />
+        <input type="submit" className={styles.loginButton} value="Submit" />
 
       </form>
-
     </div>
-
+    </div>
+    </div>
   );
 };
 
 function App (): JSX.Element {
-  const textstyle = {
-    color: "white",
-    backgroundColor: "DodgerBlue"
-  };
-
   return (
     <div>
     <Router>
     <div>
-        <Link style={textstyle} to="/">home</Link> <br></br>
-        <Link style={textstyle} to="/login">login</Link> <br></br>
-        <Link style={textstyle} to="/configs">configs</Link> <br></br>
-        <br></br>
+        <Link to="/">Home</Link> &nbsp;
+        <Link to="/login">Login </Link> &nbsp;
+        <Link to="/configs">Configs </Link> &nbsp;
     </div>
 
       <Routes>
@@ -128,11 +128,8 @@ function App (): JSX.Element {
       </Routes>
     </Router>
       <div>
-          <br />
-          <em>Glomfig app</em>
         </div>
       </div>
-
   );
 }
 

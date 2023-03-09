@@ -1,5 +1,5 @@
-$bg-color: #201ea6
-$textarea-bg-color: darken($bg-color, 10%)
+$bg-color: #D5D5D5
+$textarea-bg-color: darken($bg-color, 15%)
 $button-bg-color: darken($bg-color, 15%)
 
 
@@ -49,6 +49,14 @@ body
   font-weight: 600
 
 
+.loginButton
+  padding: 0.4rem 0.5rem
+  color: black
+  font-size: 1rem
+  border-style: black
+  font-family: Montserrat
+
+
 .configurationEntry
   display: flex
   justify-content: space-between
@@ -75,3 +83,30 @@ body
 
 .configurationEntries
   overflow-y: auto
+
+
+.login
+  max-height: 1000vh
+  min-height: 100vh
+  display: flex
+  flex-direction: column
+  justify-content: center
+  align-items: center
+  height: 100%
+  padding: 300px
+  overflow-y: auto
+
+
+.loginBox
+  min-height: 30vh
+  display: flex
+  justify-content: center
+  align-items: center
+  font: 20px sans-serif
+  background: $textarea-bg-color
+  color: #black
+  box-sizing: border-box
+  padding: 70px  100px
+  box-shadow: 12px 15px 20px rgb(0 0 0 / 0.2)
+  border-style: solid
+  border-width: 1px
