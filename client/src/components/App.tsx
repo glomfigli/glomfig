@@ -93,8 +93,7 @@ const Login: React.FC = () => {
     <div>
 
     <div className={styles.login}>
-      <div className={styles.loginbox}>
-
+      <div className={styles.loginBox}>
         <form onSubmit={handleSubmit}>
         <h2>Login</h2>
         <br />
