@@ -6,4 +6,4 @@ export const authenticateUser = (
   next: NextFunction
 ): void => {
   next();
-}
+};
