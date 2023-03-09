@@ -11,6 +11,9 @@ on:
 jobs:
   lint-client:
     runs-on: ubuntu-20.04
+    defaults:
+      run:
+        working-directory: ./client
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -18,13 +21,15 @@ jobs:
           node-version: 18
           cache: npm
       - name: Lint client
-        working-directory: ./client
         run: |
           npm ci
           npm run lint
 
   lint-server:
     runs-on: ubuntu-20.04
+    defaults:
+      run:
+        working-directory: ./server
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -32,7 +37,6 @@ jobs:
           node-version: 18
           cache: npm
       - name: Lint server
-        working-directory: ./server
         run: |
           npm ci
           npm run lint
