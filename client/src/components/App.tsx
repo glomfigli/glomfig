@@ -91,7 +91,6 @@ const Login: React.FC = () => {
 
   return (
     <div>
-
     <div className={styles.login}>
       <div className={styles.loginBox}>
         <form onSubmit={handleSubmit}>
@@ -103,7 +102,7 @@ const Login: React.FC = () => {
         <label htmlFor="password">Password: </label>
         <input type="password" id="password" name="password" />
         <br /><br />
-        <input type="submit" value="Submit" />
+        <input type="submit" className={styles.loginButton} value="Submit" />
 
       </form>
     </div>
@@ -113,17 +112,13 @@ const Login: React.FC = () => {
 };
 
 function App (): JSX.Element {
-  const textstyle = {
-    color: "black"
-  };
-
   return (
     <div>
     <Router>
     <div>
-        <Link style={textstyle} to="/">Home</Link> &nbsp;
-        <Link style={textstyle} to="/login">Login </Link> &nbsp;
-        <Link style={textstyle} to="/configs">Configs </Link> &nbsp;
+        <Link to="/">Home</Link> &nbsp;
+        <Link to="/login">Login </Link> &nbsp;
+        <Link to="/configs">Configs </Link> &nbsp;
     </div>
 
       <Routes>
