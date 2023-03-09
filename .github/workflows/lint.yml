@@ -17,11 +17,11 @@ jobs:
         with:
           node-version: 18
           cache: npm
+      - name: Lint client
         working-directory: ./client
-      - run: |
+        run: |
           npm ci
           npm run lint
-        working-directory: ./client
 
   lint-server:
     runs-on: ubuntu-20.04
@@ -31,8 +31,8 @@ jobs:
         with:
           node-version: 18
           cache: npm
+      - name: Lint server
         working-directory: ./server
-      - run: |
+        run: |
           npm ci
           npm run lint
-        working-directory: ./server
