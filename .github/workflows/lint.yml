@@ -17,6 +17,7 @@ jobs:
         with:
           node-version: 18
           cache: npm
+        working-directory: ./client
       - run: |
           npm ci
           npm run lint
@@ -30,6 +31,7 @@ jobs:
         with:
           node-version: 18
           cache: npm
+        working-directory: ./server
       - run: |
           npm ci
           npm run lint
