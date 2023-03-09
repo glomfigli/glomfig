@@ -94,9 +94,10 @@ const Login: React.FC = () => {
 
     <div className={styles.login}>
       <div className={styles.loginbox}>
-      <h2>Login</h2>
-      <br />
+
         <form onSubmit={handleSubmit}>
+        <h2>Login</h2>
+        <br />
         <label htmlFor="username">Username: </label>
         <input type="text" id="username" name="username" />
         <br />
