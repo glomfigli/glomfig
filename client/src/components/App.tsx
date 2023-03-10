@@ -3,6 +3,8 @@ import type Option from "../Option";
 import parseConfiguration from "../parser";
 import Field from "../components/Field";
 import styles from "../styles/App.module.sass";
+import LoginService, { type IUser } from "../services/login";
+
 import {
   BrowserRouter as Router,
   Routes, Route, Link
@@ -82,35 +84,56 @@ const Home: React.FC = () => {
     </div>
   );
 };
+/* eslint-disable */ 
 
 const Login: React.FC = () => {
-  function handleSubmit (event: FormEvent<HTMLFormElement>): void {
+  const [username, setUsername] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [user, setUser] = useState<IUser | null>(null);
+  { /* eslint-enable */ }
+
+  const handleLogin = async (event: FormEvent<HTMLFormElement>):
+  Promise<void> => {
     event.preventDefault();
-    console.log("submitted");
-  }
+    try {
+      const user = await LoginService.login({
+        username, password
+      });
+      setUser(user);
+      setUsername("");
+      setPassword("");
+      console.log(user);
+    } catch (exception) {
+      console.log(exception);
+    }
+  };
 
   return (
     <div>
     <div className={styles.login}>
       <div className={styles.loginBox}>
-        <form onSubmit={handleSubmit}>
+        { /* eslint-disable */}
+        <form onSubmit={handleLogin}>
+        { /* eslint-enable */}
         <h2>Login</h2>
         <br />
         <label htmlFor="username">Username: </label>
-        <input type="text" id="username" name="username" />
+        <input type="text" id="username" name="username"
+         onChange={({ target }) => { setUsername(target.value); }} />
         <br />
         <label htmlFor="password">Password: </label>
-        <input type="password" id="password" name="password" />
+        <input type="password" id="password" name="password"
+         onChange={({ target }) => { setPassword(target.value); }}/>
         <br /><br />
         <input type="submit" className={styles.loginButton} value="Submit" />
 
       </form>
     </div>
     </div>
+    <p>{user?.username}</p>
     </div>
   );
 };
-
 function App (): JSX.Element {
   return (
     <div>
