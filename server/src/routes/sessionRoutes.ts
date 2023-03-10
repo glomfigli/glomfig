@@ -15,11 +15,11 @@ const userController = new UserController<MongoRepository<IUser>>(
   new MongoRepository<IUser>(MongoUser));
 
 const postSession = async (req: Request, res: Response): Promise<void> => {
-  const { userId, password } = req.body;
+  const { username, password } = req.body;
 
-  const user = await userController.fetchUser(userId);
+  const user = await userController.fetchUserByName(username);
   try {
-    await userController.validateCredentials(userId, password);
+    await userController.validateCredentials(user, password);
     const session = await sessionController.createSession(user);
     res.cookie("authentication-token", session.authenticationToken)
       .status(201).json(session);
