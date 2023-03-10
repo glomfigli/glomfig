@@ -34,8 +34,7 @@ export class MongoRepository<T extends IModel> implements IRepository<T> {
   }
 
   public async exists (filter: object): Promise<boolean> {
-    const result = await this.model.find(filter);
-    return result !== null;
+    return (await this.model.find(filter)) !== null;
   }
 }
 
