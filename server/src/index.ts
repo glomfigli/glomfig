@@ -4,9 +4,11 @@ import database from "./database";
 import userRouter from "./routes/userRoutes";
 import configRouter from "./routes/configRoutes";
 import sessionRouter from "./routes/sessionRoutes";
+import cors from "cors";
 
 const PORT = 8080;
 const app = express();
+app.use(cors());
 app.use(express.json());
 app.use("/api", userRouter);
 app.use("/api", configRouter);
