@@ -1,5 +1,5 @@
 interface IModel {
-    id?: any
+  id?: any
 }
 
 export default IModel;

@@ -5,5 +5,4 @@ interface IConfig extends IModel {
   sourceText: string
 }
 
-
 export default IConfig;

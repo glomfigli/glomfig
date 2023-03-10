@@ -20,7 +20,6 @@ const postConfig = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
-
 /* eslint-disable @typescript-eslint/no-misused-promises */
 router.post("/configs/:userId", postConfig);
 /* eslint-enable @typescript-eslint/no-misused-promises */

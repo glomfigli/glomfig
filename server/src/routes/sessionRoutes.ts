@@ -28,11 +28,14 @@ const postSession = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
-const invalidateSessions = async (req: Request, res: Response): Promise<void> => {
+const invalidateSessions = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
   const { userId } = req.body;
 
   try {
-    const deletedCount = await sessionController.invalidateAll(userId)
+    const deletedCount = await sessionController.invalidateAll(userId);
     res.status(200).json({ status: "ok", numInvalidated: deletedCount });
   } catch (err: unknown) {
     res.status(400).json({ error: (err as Error).message });

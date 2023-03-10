@@ -1,4 +1,4 @@
-import { Model } from "mongoose";
+import { type Model } from "mongoose";
 import type IModel from "../../models/IModel";
 import type IRepository from "../IRepository";
 
@@ -17,7 +17,7 @@ export class MongoRepository<T extends IModel> implements IRepository<T> {
     return await this.model.findOne(filter) as T;
   }
 
-  public async findById (id: string) {
+  public async findById (id: string): Promise<T> {
     return await this.model.findById(id) as T;
   }
 
@@ -39,4 +39,4 @@ export class MongoRepository<T extends IModel> implements IRepository<T> {
   }
 }
 
-export default MongoRepository; 
+export default MongoRepository;

@@ -1,5 +1,5 @@
-import IModel from "./IModel";
-import IUser from "./IUser";
+import type IModel from "./IModel";
+import type IUser from "./IUser";
 
 interface ISession extends IModel {
   createdAt?: Date
