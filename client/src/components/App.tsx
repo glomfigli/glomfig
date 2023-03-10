@@ -1,139 +1,11 @@
-import { useState, type FormEvent } from "react";
-import type Option from "../Option";
-import parseConfiguration from "../parser";
-import Field from "../components/Field";
-import styles from "../styles/App.module.sass";
-import LoginService, { type IUser } from "../services/login";
-
+import { Login } from "./Login";
+import { ConfigDisplay } from "./ConfigDisplay";
+import { Home } from "./Home";
 import {
   BrowserRouter as Router,
   Routes, Route, Link
 } from "react-router-dom";
 
-// eslint-disable-next-line
-function drawOptions (
-  setOption: (option: Option) => void, options: Option[]
-): JSX.Element[] {
-  return options.map((option) =>
-    <Field
-      key={option.id}
-      type="number"
-      option={option}
-      valueChanged={setOption}
-    />
-  );
-}
-
-const ConfigScreen: React.FC = () => {
-  const [configuration, setConfiguration] = useState<Configuration>({
-    name: "Default Configuration",
-    entries: []
-  });
-
-  const drawConfiguration = (): JSX.Element[] =>
-    configuration.entries.map((entry) =>
-      <div className={styles.configurationEntry} key={entry.id}>
-        <p className={styles.configurationEntryName}>{entry.id}</p>
-        <p className={styles.configurationEntryValue}>{entry.value}</p>
-      </div>
-    );
-
-  const handleFormSubmit = (event: FormEvent<HTMLFormElement>): void => {
-    event.preventDefault();
-
-    const source = (event.target as any)["configuration-source"].value;
-    const entries = parseConfiguration(source);
-
-    setConfiguration((oldConfiguration) => ({ ...oldConfiguration, entries }));
-  };
-
-  return (
-
-  <div className={styles.app}>
-  <div className={styles.panel}>
-    <form onSubmit={handleFormSubmit} className={styles.form}>
-      <textarea
-        name="configuration-source"
-        className={styles.configurationSourceText}></textarea>
-      <div className={styles.configurationSourceHeader}>
-
-        <select className={styles.gameSelect}
-          name="config-type" id="config-type">
-          <option value="csgo">CS:GO</option>
-        </select>
-        <button type="submit" className={styles.parseButton}>Parse</button>
-      </div>
-    </form>
-  </div>
-  <div className={styles.panel}>
-    <div className={styles.configurationEntries}>
-      { drawConfiguration() }
-    </div>
-  </div>
-</div>
-  );
-};
-
-const Home: React.FC = () => {
-  return (
-    <div>
-      <br />
-      <h2>Home</h2>
-      <br />
-
-    </div>
-  );
-};
-/* eslint-disable */ 
-
-const Login: React.FC = () => {
-  const [username, setUsername] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-  const [user, setUser] = useState<IUser | null>(null);
-  { /* eslint-enable */ }
-
-  const handleLogin = async (event: FormEvent<HTMLFormElement>):
-  Promise<void> => {
-    event.preventDefault();
-    try {
-      const user = await LoginService.login({
-        username, password
-      });
-      setUser(user);
-      setUsername("");
-      setPassword("");
-      console.log(user);
-    } catch (exception) {
-      console.log(exception);
-    }
-  };
-
-  return (
-    <div>
-    <div className={styles.login}>
-      <div className={styles.loginBox}>
-        { /* eslint-disable */}
-        <form onSubmit={handleLogin}>
-        { /* eslint-enable */}
-        <h2>Login</h2>
-        <br />
-        <label htmlFor="username">Username: </label>
-        <input type="text" id="username" name="username"
-         onChange={({ target }) => { setUsername(target.value); }} />
-        <br />
-        <label htmlFor="password">Password: </label>
-        <input type="password" id="password" name="password"
-         onChange={({ target }) => { setPassword(target.value); }}/>
-        <br /><br />
-        <input type="submit" className={styles.loginButton} value="Submit" />
-
-      </form>
-    </div>
-    </div>
-    <p>{user?.username}</p>
-    </div>
-  );
-};
 function App (): JSX.Element {
   return (
     <div>
@@ -143,9 +15,8 @@ function App (): JSX.Element {
         <Link to="/login">Login </Link> &nbsp;
         <Link to="/configs">Configs </Link> &nbsp;
     </div>
-
       <Routes>
-        <Route path="/configs" element={<ConfigScreen/>} />
+        <Route path="/configs" element={<ConfigDisplay/>} />
         <Route path="/login" element={<Login/>} />
         <Route path="/" element={<Home />} />
       </Routes>
