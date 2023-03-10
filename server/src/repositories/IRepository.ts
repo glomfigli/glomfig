@@ -1,13 +1,15 @@
 import type IModel from "../models/IModel";
 
-interface IRepository<T extends IModel> {
-  insert (document: T): T | Promise<T>
-  findOne (filter: object): T | Promise<T>
-  findById (id: string): T | Promise<T>
-  deleteOne (filter: object): T | Promise<T>
-  deleteMany (filter: object): number | Promise<number>
-  deleteById (id: string): T | Promise<T>
-  exists (filter: object): boolean | Promise<boolean>
+type Result<T> = T | Promise<T>;
+
+interface IRepository<M extends IModel> {
+  insert (document: M): Result<M>
+  findOne (filter: object): Result<M>
+  findById (id: string): Result<M>
+  deleteOne (filter: object): Result<M>
+  deleteMany (filter: object): Result<number>
+  deleteById (id: string): Result<M>
+  exists (filter: object): Result<boolean>
 }
 
 export default IRepository;

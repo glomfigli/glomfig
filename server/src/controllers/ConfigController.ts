@@ -2,8 +2,7 @@ import type IRepository from "../repositories/IRepository";
 import type IConfig from "../models/IConfig";
 import Controller from "./Controller";
 
-class ConfigController<Repository extends IRepository<IConfig>>
-  extends Controller<Repository> {
+class ConfigController<R extends IRepository<IConfig>> extends Controller<R> {
   public async addConfig (
     name: string,
     sourceText: string
