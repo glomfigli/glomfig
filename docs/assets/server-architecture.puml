@@ -1,0 +1,88 @@
+@startuml server-architecture-package-overview
+  left to right direction
+  package routes {}
+  package controllers {}
+  package repositories {}
+  package models {}
+
+  ' skinparam maxMessageSize 100
+  skinparam wrapWidth 100
+
+  routes -> controllers
+  note "Gather the approriate data from HTTP requests." as routenote
+  routenote .- routes
+
+  note "Handle appplication business logic; call required controller methods." as ctrlnote
+  ctrlnote .- controllers
+
+  controllers -> repositories
+
+  note "Communicate with persistent data storage as a whole. The context is the data itself, not the implementation-specific details." as reponote
+  reponote .- repositories
+
+  repositories -> models
+
+  note "Handle the actual communication with storage, such as database systems." as modelnote
+  modelnote .- models
+@enduml
+
+@startuml server-architecture-controllers
+  package controllers {
+    class Controller {}
+    class ConfigController {}
+    class SessionController {}
+    class UserController {}
+  }
+
+  ConfigController --|> Controller
+  SessionController --|> Controller
+  UserController --|> Controller
+
+@enduml
+
+@startuml server-architecture-repositories
+  left to right direction
+  package repositories {
+    interface IRepository {}
+    package mongo {
+      class MongoRepository {}
+    }
+  }
+
+  package models {
+    package models.mongo {
+        class Config {}
+        class Session {}
+        class User {}
+    }
+  }
+
+  Config -> MongoRepository
+  Session -> MongoRepository
+  User -> MongoRepository
+
+  MongoRepository --|> IRepository
+@enduml
+
+@startuml server-architecture-models
+  package models {
+    interface IModel {}
+    interface IConfig {}
+    interface ISession {}
+    interface IUser {}
+
+    package mongo {
+        class Config {}
+        class Session {}
+        class User {}
+    }
+  }
+
+  IConfig --|> IModel
+  ISession --|> IModel
+  IUser --|> IModel
+
+  Config --|> IConfig
+  Session --|> ISession
+  User --|> IUser
+@enduml
