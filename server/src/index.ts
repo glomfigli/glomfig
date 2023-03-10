@@ -1,9 +1,9 @@
 import express from "express";
 import "./config";
 import database from "./database";
-import userRouter from "./routes/user-routes";
-import configRouter from "./routes/config-routes";
-import sessionRouter from "./routes/session-routes";
+import userRouter from "./routes/userRoutes";
+import configRouter from "./routes/configRoutes";
+import sessionRouter from "./routes/sessionRoutes";
 
 const PORT = 8080;
 const app = express();
