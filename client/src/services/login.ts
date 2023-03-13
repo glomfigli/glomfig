@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseUrl = "http://localhost:8080/api";
+const baseUrl = "/api";
 const login = async (credentials: { username: string, password: string }):
 Promise<IUser> => {
   const response = await axios.post(
