@@ -42,10 +42,9 @@ class UserController<R extends IRepository<IUser>> extends Controller<R> {
   }
 
   public async validateCredentials (
-    userId: string,
+    user: IUser,
     password: string
   ): Promise<void> {
-    const user = await this.repository.findById(userId);
     if (!(await bcrypt.compare(password, user.passwordHash))) {
       throw new Error("Invalid credetials");
     }
@@ -53,6 +52,10 @@ class UserController<R extends IRepository<IUser>> extends Controller<R> {
 
   public async fetchUser (userId: string): Promise<IUser> {
     return await this.repository.findById(userId);
+  }
+
+  public async fetchUserByName (username: string): Promise<IUser> {
+    return await this.repository.findOne({ username });
   }
 
   public async delete (userId: string): Promise<IUser> {
