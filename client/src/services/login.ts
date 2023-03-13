@@ -8,7 +8,8 @@ Promise<IUser> => {
     credentials,
     { withCredentials: true }
   );
-  return response.data as IUser;
+  window.localStorage.setItem("userToken", response.data.authenticationToken);
+  return response.data.user as IUser;
 };
 
 const fetchCurrent = async (authToken: string): Promise<IUser> => {
@@ -22,7 +23,7 @@ const fetchCurrent = async (authToken: string): Promise<IUser> => {
 
 export interface IUser {
   username: string
-  password: string
+  configs: string[]
 }
 
 export default { login, fetchCurrent };

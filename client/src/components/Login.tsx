@@ -3,8 +3,12 @@ import styles from "../styles/App.module.sass";
 import LoginService, { type IUser } from "../services/login";
 
 const isLoggedIn = (): boolean => {
-  return document.cookie.split(";").find((cookie) =>
-    cookie.startsWith("authentication-token")) !== undefined;
+  const token = window.localStorage.getItem("userToken");
+
+  if (token !== null) {
+    return true;
+  }
+  return false;
 };
 
 export const Login: React.FC = () => {
@@ -19,6 +23,7 @@ export const Login: React.FC = () => {
       const user = await LoginService.login({
         username, password
       });
+      console.log("Added ", user, " to the cookies and local storage");
       setUser(user);
       setUsername("");
       setPassword("");
@@ -27,7 +32,16 @@ export const Login: React.FC = () => {
     }
   };
 
-  const signOut = (): void => { };
+  /* eslint-disable */
+  const signOut = (): void => {
+      window.localStorage.removeItem("userToken");
+      location.reload();
+  };
+
+  const getAuthToken = (): void => {
+      console.log(window.localStorage.getItem("userToken"));
+  };
+  /* eslint-enable */
 
   const loggedIn = isLoggedIn();
   console.log(user);
@@ -36,8 +50,9 @@ export const Login: React.FC = () => {
     <div>
       { loggedIn
         ? <div>
-            <p>logged in as</p>
+            <p>logged in as {user?.username}</p>
             <button onClick={signOut}>Sign out</button>
+            <button onClick={getAuthToken}>Get auth token</button>
           </div>
         : <div className={styles.login}>
       <div className={styles.loginBox}>
